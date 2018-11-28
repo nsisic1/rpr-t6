@@ -1,0 +1,5 @@
+.groupBox {
+    -fx-border-color: lightGrey;
+    -fx-border-width: 2;
+    -fx-border-radius: 2px;
+}
