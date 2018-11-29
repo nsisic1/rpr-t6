@@ -8,6 +8,7 @@ import static java.time.LocalDate.now;
 
 public class Podaci {
 
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     static boolean isImeValid(String ime) {
         return (ime.length() > 0 && ime.length() <= 20 && (ime.matches(".*[a-z].*") || ime.matches(".*[A-Z].*")));
@@ -27,6 +28,12 @@ public class Podaci {
         // jmbg?
     }
 
-
+    static boolean isEmailValid(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
+        return matcher.find();
+    }
 
 }
