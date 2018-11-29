@@ -7,6 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
+import java.util.function.Function;
+
 public class Controller {
     @FXML
     public TextField imeField;
@@ -37,7 +40,7 @@ public class Controller {
     @FXML
     public Button potvrdaButton;
 
-    boolean validnoIme, validnoPrezime, validanIndeks, validanJmbg,validanDatum, validanEmail;
+    boolean validnoIme, validnoPrezime, validanIndeks, validanJmbg, validanDatum, validanEmail;
 
     private SimpleStringProperty ime;
     private SimpleStringProperty prezime;
@@ -81,6 +84,12 @@ public class Controller {
         emailField.textProperty().bindBidirectional(email);
 
         initIme();
+        initPrezime();
+        initBrojIndeksa();
+        initJMBG(dateField.getValue());
+        initDatum();
+        initEmail();
+
     }
 
     void initIme() {
@@ -91,18 +100,112 @@ public class Controller {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 if (Podaci.isImeValid(n)) {
-                    imeField.getStyleClass().removeAll("poljeNeispravno");
+                    imeField.getStyleClass().removeAll("poljeNijeIspravno");
                     imeField.getStyleClass().add("poljeIspravno");
                     validnoIme = true;
                 } else {
                     imeField.getStyleClass().removeAll("poljeIspravno");
-                    imeField.getStyleClass().add("poljeNeispravno");
+                    imeField.getStyleClass().add("poljeNijeIspravno");
                     validnoIme = false;
                 }
             }
         });
     }
 
+    void initPrezime() {
+        validnoPrezime = false;
+        prezimeField.getStyleClass().add("poljeNijeIspravno");
+        prezimeField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (Podaci.isPrezimeValid(n)) {
+                    prezimeField.getStyleClass().removeAll("poljeNijeIspravno");
+                    prezimeField.getStyleClass().add("poljeIspravno");
+                    validnoPrezime = true;
+                } else {
+                    prezimeField.getStyleClass().removeAll("poljeIspravno");
+                    prezimeField.getStyleClass().add("poljeNijeIspravno");
+                    validnoPrezime = false;
+                }
+            }
+        });
+    }
+
+    void initBrojIndeksa() {
+        validanIndeks = false;
+        brojIndeksaField.getStyleClass().add("poljeNijeIspravno");
+        brojIndeksaField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (Podaci.isBrojIndeksaValid(n)) {
+                    brojIndeksaField.getStyleClass().removeAll("poljeNijeIspravno");
+                    brojIndeksaField.getStyleClass().add("poljeIspravno");
+                    validanIndeks = true;
+                } else {
+                    brojIndeksaField.getStyleClass().removeAll("poljeIspravno");
+                    brojIndeksaField.getStyleClass().add("poljeNijeIspravno");
+                    validanIndeks = false;
+                }
+            }
+        });
+    }
+
+    void initJMBG(LocalDate datum) {
+        validanJmbg = false;
+        jmbgField.getStyleClass().add("poljeNijeIspravno");
+        jmbgField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (Podaci.isJmbgValid(n, datum)) {
+                    jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbgField.getStyleClass().add("poljeIspravno");
+                    validanJmbg = true;
+                } else {
+                    jmbgField.getStyleClass().removeAll("poljeIspravno");
+                    jmbgField.getStyleClass().add("poljeNijeIspravno");
+                    validanJmbg = false;
+                }
+            }
+        });
+    }
+
+    void initDatum() {
+        validanDatum = false;
+        dateField.getStyleClass().add("poljeNijeIspravno");
+        dateField.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue) {
+                if (Podaci.isDateValid(dateField.getValue())) {
+                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateField.getStyleClass().add("poljeIspravno");
+                    validanDatum = true;
+                } else {
+                    dateField.getStyleClass().removeAll("poljeIspravno");
+                    dateField.getStyleClass().add("poljeNijeIspravno");
+                    validanDatum = false;
+                }
+            }
+        });
+    }
+
+    void initEmail() {
+        validanEmail = false;
+        emailField.getStyleClass().add("poljeNijeIspravno");
+        emailField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (Podaci.isEmailValid(n)) {
+                    emailField.getStyleClass().removeAll("poljeNijeIspravno");
+                    emailField.getStyleClass().add("poljeIspravno");
+                    validanEmail = true;
+                } else {
+                    emailField.getStyleClass().removeAll("poljeIspravno");
+                    emailField.getStyleClass().add("poljeNijeIspravno");
+                    validanEmail = false;
+                }
+            }
+        });
+    }
 
 
     private boolean formularValidan() {
