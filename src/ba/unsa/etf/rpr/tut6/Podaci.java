@@ -73,4 +73,8 @@ public class Podaci {
         return matcher.find();
     }
 
+    static boolean isMjestoValid(String mjesto) {
+        return !mjesto.isEmpty();
+    }
+
 }
