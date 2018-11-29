@@ -1,6 +1,9 @@
 package ba.unsa.etf.rpr.tut6;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -72,14 +75,40 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        imeField.textProperty().bindBidirectional(ime);
         prezimeField.textProperty().bindBidirectional(prezime);
         brojIndeksaField.textProperty().bindBidirectional(brojIndeksa);
         jmbgField.textProperty().bindBidirectional(jmbg);
         emailField.textProperty().bindBidirectional(email);
+
+        initIme();
+    }
+
+    void initIme() {
+        imeField.textProperty().bindBidirectional(ime);
+        validnoIme = false;
+        imeField.getStyleClass().add("poljeNijeIspravno");
+        imeField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (Podaci.isImeValid(n)) {
+                    imeField.getStyleClass().removeAll("poljeNeispravno");
+                    imeField.getStyleClass().add("poljeIspravno");
+                    validnoIme = true;
+                } else {
+                    imeField.getStyleClass().removeAll("poljeIspravno");
+                    imeField.getStyleClass().add("poljeNeispravno");
+                    validnoIme = false;
+                }
+            }
+        });
     }
 
 
+
+    private boolean formularValidan() {
+        //return validnoIme && validnoPrezime && validanIndeks && validanJmbg && validanDatum && validanEmail;
+        return true;
+    }
 
 
 
