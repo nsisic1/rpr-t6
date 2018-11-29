@@ -40,7 +40,13 @@ public class Controller {
     @FXML
     public Button potvrdaButton;
 
-    boolean validnoIme, validnoPrezime, validanIndeks, validanJmbg, validanDatum, validanEmail;
+    // BoolWrapper validnoIme, validnoPrezime, validanIndeks, validanJmbg, validanDatum, validanEmail; TODO zabiljezi: ne
+    BoolWrapper validnoIme = new BoolWrapper();
+    BoolWrapper validnoPrezime = new BoolWrapper();
+    BoolWrapper validanIndeks = new BoolWrapper();
+    BoolWrapper validanJmbg = new BoolWrapper();
+    BoolWrapper validanDatum = new BoolWrapper();
+    BoolWrapper validanEmail = new BoolWrapper();
 
     private SimpleStringProperty ime;
     private SimpleStringProperty prezime;
@@ -78,23 +84,28 @@ public class Controller {
 
     @FXML
     public void initialize() {
+        imeField.textProperty().bindBidirectional(ime);
         prezimeField.textProperty().bindBidirectional(prezime);
         brojIndeksaField.textProperty().bindBidirectional(brojIndeksa);
         jmbgField.textProperty().bindBidirectional(jmbg);
         emailField.textProperty().bindBidirectional(email);
 
-        initIme();
+        initField(imeField, validnoIme, Podaci::isImeValid); // TODO zabiljezi slanje metode kao argument
+        initField(prezimeField, validnoPrezime, Podaci::isPrezimeValid);
+        initField(brojIndeksaField, validanIndeks, Podaci::isBrojIndeksaValid);
+        /*initIme();
         initPrezime();
-        initBrojIndeksa();
+        initBrojIndeksa();*/
         initJMBG(dateField);
         initDatum();
-        initEmail();
+        initField(emailField, validanEmail, Podaci::isEmailValid);
+        //initEmail();
 
     }
 
-    void initIme() {
+    /*void initIme() {
         imeField.textProperty().bindBidirectional(ime);
-        validnoIme = false;
+        // validnoIme.set(false);
         imeField.getStyleClass().add("poljeNijeIspravno");
         imeField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -148,10 +159,10 @@ public class Controller {
                 }
             }
         });
-    }
+    }*/
 
     void initJMBG(DatePicker d) {
-        validanJmbg = false;
+        validanJmbg.set(false);
         jmbgField.getStyleClass().add("poljeNijeIspravno");
         jmbgField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -161,18 +172,18 @@ public class Controller {
                 if (Podaci.isJmbgValid(n, datum)) {
                     jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgField.getStyleClass().add("poljeIspravno");
-                    validanJmbg = true;
+                    validanJmbg.set(true);
                 } else {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
-                    validanJmbg = false;
+                    validanJmbg.set(false);
                 }
             }
         });
     }
 
     void initDatum() {
-        validanDatum = false;
+        validanDatum.set(false);
         dateField.getStyleClass().add("poljeNijeIspravno");
         dateField.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override
@@ -180,16 +191,17 @@ public class Controller {
                 if (Podaci.isDateValid(dateField.getValue())) {
                     dateField.getStyleClass().removeAll("poljeNijeIspravno");
                     dateField.getStyleClass().add("poljeIspravno");
-                    validanDatum = true;
+                    validanDatum.set(true);
                 } else {
                     dateField.getStyleClass().removeAll("poljeIspravno");
                     dateField.getStyleClass().add("poljeNijeIspravno");
-                    validanDatum = false;
+                    validanDatum.set(false);
                 }
             }
         });
     }
 
+    /*
     void initEmail() {
         validanEmail = false;
         emailField.getStyleClass().add("poljeNijeIspravno");
@@ -204,6 +216,26 @@ public class Controller {
                     emailField.getStyleClass().removeAll("poljeIspravno");
                     emailField.getStyleClass().add("poljeNijeIspravno");
                     validanEmail = false;
+                }
+            }
+        });
+    }*/
+
+    void initField(TextField field, BoolWrapper valid, Function<String, Boolean> isValid) {
+        System.out.println(valid);
+        valid.set(false);
+        field.getStyleClass().add("poljeNijeIspravno");
+        field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                if (isValid.apply(n)) {
+                    field.getStyleClass().removeAll("poljeNijeIspravno");
+                    field.getStyleClass().add("poljeIspravno");
+                    valid.set(true);
+                } else {
+                    field.getStyleClass().removeAll("poljeIspravno");
+                    field.getStyleClass().add("poljeNijeIspravno");
+                    valid.set(false);
                 }
             }
         });
