@@ -86,7 +86,7 @@ public class Controller {
         initIme();
         initPrezime();
         initBrojIndeksa();
-        initJMBG(dateField.getValue());
+        initJMBG(dateField);
         initDatum();
         initEmail();
 
@@ -150,12 +150,14 @@ public class Controller {
         });
     }
 
-    void initJMBG(LocalDate datum) {
+    void initJMBG(DatePicker d) {
         validanJmbg = false;
         jmbgField.getStyleClass().add("poljeNijeIspravno");
         jmbgField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
+                LocalDate datum = d.getValue();
+                System.out.println(datum);
                 if (Podaci.isJmbgValid(n, datum)) {
                     jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgField.getStyleClass().add("poljeIspravno");
@@ -220,7 +222,7 @@ public class Controller {
         //ime.set("Abc");
         brojIndeksa.set("");*/
         System.out.println(formularValidan());
-        if (formularValidan()) {
+        if (true) {
             System.out.println("**** Podaci o studentu ****");
             // Osnovni podaci
             System.out.println("Osnovni podaci");

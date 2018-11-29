@@ -23,11 +23,12 @@ public class Podaci {
     }
 
     static boolean isJmbgValid(String jmbg, LocalDate datum) {
-        System.out.println("Pcetak jmbg provjere");
+        System.out.println("Pocetak jmbg provjere");
         /*System.out.println(jmbg);
         System.out.println(jmbg.matches("[0-9]*"));
         System.out.println(datum == null);*/
         if (jmbg.length() != 13 || !jmbg.matches("[0-9]*") || datum == null) {
+            System.out.println("Hmm");
             return  false;
         }
         int[] brojevi = new int[13];
