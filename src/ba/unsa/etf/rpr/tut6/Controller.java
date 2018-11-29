@@ -213,6 +213,29 @@ public class Controller {
         return true;
     }
 
+    public void potvrdiClick(ActionEvent actionEvent) {
+        /*if (Podaci.isEmailValid(getEmail())) {
+            prezime.set(getIme());
+        }
+        //ime.set("Abc");
+        brojIndeksa.set("");*/
+        System.out.println(formularValidan());
+        if (formularValidan()) {
+            System.out.println("**** Podaci o studentu ****");
+            // Osnovni podaci
+            System.out.println("Osnovni podaci");
+            System.out.println("--------------");
+            System.out.println("Ime i prezime: " + getIme() + " " + getPrezime());
+            System.out.println("Broj indeksa: " + getBrojIndeksa());
+            // Detaljni licni podaci
+            System.out.println("Detaljni lični podaci");
+            System.out.println("---------------------");
+            System.out.println("JMBG: " + getJmbg());
+            System.out.println("Datum rođenja: " + dateField.getValue().toString());
+            System.out.println("Mjesto rođenja: " + mjestoBox.getValue());
+        }
+    }
+
 
 
 }
