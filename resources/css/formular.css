@@ -3,3 +3,11 @@
     -fx-border-width: 2;
     -fx-border-radius: 2px;
 }
+
+.poljeIspravno {
+    -fx-control-inner-background: greenyellow;
+}
+
+.poljeNijeIspravno {
+    -fx-control-inner-background: lightpink;
+}
