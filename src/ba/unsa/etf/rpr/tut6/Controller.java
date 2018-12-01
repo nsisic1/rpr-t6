@@ -26,6 +26,8 @@ public class Controller {
     @FXML
     public TextField emailField;
     @FXML
+    public TextField telefonField;
+    @FXML
     public ChoiceBox odsjekBox;
     @FXML
     public ChoiceBox godinaBox;
@@ -47,12 +49,14 @@ public class Controller {
     private BoolWrapper validanJmbg = new BoolWrapper();
     private BoolWrapper validanDatum = new BoolWrapper();
     private BoolWrapper validanEmail = new BoolWrapper();
+    private BoolWrapper validanTelefon = new BoolWrapper();
 
     private SimpleStringProperty ime;
     private SimpleStringProperty prezime;
     private SimpleStringProperty brojIndeksa;
     private SimpleStringProperty jmbg;
     private SimpleStringProperty email;
+    private SimpleStringProperty telefon;
 
     public Controller() {
         ime = new SimpleStringProperty("");
@@ -60,26 +64,31 @@ public class Controller {
         brojIndeksa = new SimpleStringProperty("");
         jmbg = new SimpleStringProperty("");
         email = new SimpleStringProperty("");
+        telefon = new SimpleStringProperty("");
     }
 
-    public String getIme() {
+    private String getIme() {
         return ime.get();
     }
 
-    public String getPrezime() {
+    private String getPrezime() {
         return prezime.get();
     }
 
-    public String getBrojIndeksa() {
+    private String getBrojIndeksa() {
         return brojIndeksa.get();
     }
 
-    public String getJmbg() {
+    private String getJmbg() {
         return jmbg.get();
     }
 
-    public String getEmail() {
+    private String getEmail() {
         return email.get();
+    }
+
+    private String getTelefon() {
+        return telefon.get();
     }
 
     @FXML
@@ -89,6 +98,7 @@ public class Controller {
         brojIndeksaField.textProperty().bindBidirectional(brojIndeksa);
         jmbgField.textProperty().bindBidirectional(jmbg);
         emailField.textProperty().bindBidirectional(email);
+        telefonField.textProperty().bindBidirectional(telefon);
 
         initField(imeField, validnoIme, Podaci::isImeValid); // TODO zabiljezi slanje metode kao argument
         initField(prezimeField, validnoPrezime, Podaci::isPrezimeValid);
@@ -100,6 +110,7 @@ public class Controller {
         initDatum();
         initField(emailField, validanEmail, Podaci::isEmailValid);
         //initEmail();
+        initField(telefonField, validanTelefon, Podaci::isTelefonValid);
 
     }
 
@@ -155,6 +166,7 @@ public class Controller {
                 }
             }
         });
+        // TODO: check out https://stackoverflow.com/questions/32346893/javafx-datepicker-not-updating-value ?
     }
 
     private void updateJmbgFieldClass() {
@@ -170,10 +182,9 @@ public class Controller {
     }
 
 
-
     private boolean formularValidan() {
         return validnoIme.get() && validnoPrezime.get() && validanIndeks.get() && validanJmbg.get() && validanDatum.get() &&
-                validanEmail.get();
+                validanEmail.get() && validanTelefon.get();
     }
 
     public void potvrdiClick(ActionEvent actionEvent) {

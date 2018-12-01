@@ -12,6 +12,7 @@ public class Podaci {
 
     static boolean isImeValid(String ime) {
         return (ime.length() > 0 && ime.length() <= 20 && (ime.matches(".*[a-z].*") || ime.matches(".*[A-Z].*")));
+        // Po uslovu zadatok u zadatku
     }
 
     static boolean isPrezimeValid(String prezime) {
@@ -76,6 +77,10 @@ public class Podaci {
 
     static boolean isMjestoValid(String mjesto) {
         return !mjesto.isEmpty();
+    }
+
+    static boolean isTelefonValid(String broj) {
+        return broj.matches("\\d{3}-\\d{6}");
     }
 
 }
