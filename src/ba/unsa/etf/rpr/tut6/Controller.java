@@ -24,9 +24,11 @@ public class Controller {
     @FXML
     public ComboBox mjestoBox;
     @FXML
-    public TextField emailField;
+    public TextField adresaField;
     @FXML
     public TextField telefonField;
+    @FXML
+    public TextField emailField;
     @FXML
     public ChoiceBox odsjekBox;
     @FXML
@@ -55,16 +57,18 @@ public class Controller {
     private SimpleStringProperty prezime;
     private SimpleStringProperty brojIndeksa;
     private SimpleStringProperty jmbg;
-    private SimpleStringProperty email;
+    private SimpleStringProperty adresa;
     private SimpleStringProperty telefon;
+    private SimpleStringProperty email;
 
     public Controller() {
         ime = new SimpleStringProperty("");
         prezime = new SimpleStringProperty("");
         brojIndeksa = new SimpleStringProperty("");
         jmbg = new SimpleStringProperty("");
-        email = new SimpleStringProperty("");
+        adresa = new SimpleStringProperty("");
         telefon = new SimpleStringProperty("");
+        email = new SimpleStringProperty("");
     }
 
     private String getIme() {
@@ -83,13 +87,18 @@ public class Controller {
         return jmbg.get();
     }
 
-    private String getEmail() {
-        return email.get();
+    private String getAdresa() {
+        return adresa.get();
     }
 
     private String getTelefon() {
         return telefon.get();
     }
+
+    private String getEmail() {
+        return email.get();
+    }
+
 
     @FXML
     public void initialize() {
@@ -97,8 +106,9 @@ public class Controller {
         prezimeField.textProperty().bindBidirectional(prezime);
         brojIndeksaField.textProperty().bindBidirectional(brojIndeksa);
         jmbgField.textProperty().bindBidirectional(jmbg);
-        emailField.textProperty().bindBidirectional(email);
+        adresaField.textProperty().bindBidirectional(adresa);
         telefonField.textProperty().bindBidirectional(telefon);
+        emailField.textProperty().bindBidirectional(email);
 
         initField(imeField, validnoIme, Podaci::isImeValid); // TODO zabiljezi slanje metode kao argument
         initField(prezimeField, validnoPrezime, Podaci::isPrezimeValid);

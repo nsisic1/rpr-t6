@@ -102,7 +102,7 @@
                     </rowConstraints>
                     <children>
                         <Label text="Kontakt  podaci" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="adresaField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="telefonField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Kontakt adresa" GridPane.rowIndex="1" />
