@@ -274,6 +274,6 @@ public class Controller {
         System.out.println("\n");
     }
 
-    // TODO: krahira kad nisu selektovani odjsek, godina itd; Testovi; validacija sa pasivnim indikatorom; dijaloski prozor; testovi
+    // TODO: ideatestovi
 
 }
