@@ -43,6 +43,7 @@ public class Controller {
     public CheckBox borackeKategorijeCheck;
     @FXML
     public Button potvrdaButton;
+    public ToggleGroup statusFinansiranja;
 
     // BoolWrapper validnoIme, validnoPrezime, validanIndeks, validanJmbg, validanDatum, validanEmail; TODO zabiljezi: ne
     private BoolWrapper validnoIme = new BoolWrapper();
@@ -57,9 +58,13 @@ public class Controller {
     private SimpleStringProperty prezime;
     private SimpleStringProperty brojIndeksa;
     private SimpleStringProperty jmbg;
+    private SimpleStringProperty mjesto;
     private SimpleStringProperty adresa;
     private SimpleStringProperty telefon;
     private SimpleStringProperty email;
+    private SimpleStringProperty odsjek;
+    private SimpleStringProperty godina;
+    private SimpleStringProperty ciklus;
 
     public Controller() {
         ime = new SimpleStringProperty("");
@@ -69,6 +74,10 @@ public class Controller {
         adresa = new SimpleStringProperty("");
         telefon = new SimpleStringProperty("");
         email = new SimpleStringProperty("");
+        odsjek = new SimpleStringProperty("");
+        godina = new SimpleStringProperty("");
+        ciklus = new SimpleStringProperty("");
+        mjesto = new SimpleStringProperty("");
     }
 
     private String getIme() {
@@ -87,6 +96,10 @@ public class Controller {
         return jmbg.get();
     }
 
+    private String getMjesto() {
+        return mjestoBox.getValue().toString();
+    }
+
     private String getAdresa() {
         return adresa.get();
     }
@@ -99,6 +112,18 @@ public class Controller {
         return email.get();
     }
 
+    private String getOdsjek() {
+        return odsjekBox.getValue().toString();
+    }
+
+    private String getGodina() {
+        return godinaBox.getValue().toString();
+    }
+
+    private String getCiklus() {
+        return ciklusBox.getValue().toString();
+    }
+
 
     @FXML
     public void initialize() {
@@ -106,6 +131,7 @@ public class Controller {
         prezimeField.textProperty().bindBidirectional(prezime);
         brojIndeksaField.textProperty().bindBidirectional(brojIndeksa);
         jmbgField.textProperty().bindBidirectional(jmbg);
+        //mjestoBox.valueProperty().bindBidirectional(mjesto);
         adresaField.textProperty().bindBidirectional(adresa);
         telefonField.textProperty().bindBidirectional(telefon);
         emailField.textProperty().bindBidirectional(email);
@@ -162,7 +188,7 @@ public class Controller {
         dateField.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observable, LocalDate o, LocalDate n) {
-                System.out.println(dateField.getValue());
+                //System.out.println(dateField.getValue());
                 if (Podaci.isDateValid(dateField.getValue())) {
                     dateField.getStyleClass().removeAll("poljeNijeIspravno");
                     dateField.getStyleClass().add("poljeIspravno");
@@ -203,20 +229,42 @@ public class Controller {
         }
         //ime.set("Abc");
         brojIndeksa.set("");*/
-        System.out.println(formularValidan());
+        //System.out.println(formularValidan());
         if (formularValidan()) {
             System.out.println("**** Podaci o studentu ****");
             // Osnovni podaci
-            System.out.println("Osnovni podaci");
-            System.out.println("--------------");
+            System.out.println("----------------");
+            System.out.println("|Osnovni podaci|");
+            System.out.println("----------------");
             System.out.println("Ime i prezime: " + getIme() + " " + getPrezime());
             System.out.println("Broj indeksa: " + getBrojIndeksa());
             // Detaljni licni podaci
-            System.out.println("Detaljni lični podaci");
-            System.out.println("---------------------");
+            System.out.println("-----------------------");
+            System.out.println("|Detaljni lični podaci|");
+            System.out.println("-----------------------");
             System.out.println("JMBG: " + getJmbg());
             System.out.println("Datum rođenja: " + dateField.getValue().toString());
-            System.out.println("Mjesto rođenja: " + mjestoBox.getValue());
+            System.out.println("Mjesto rođenja: " + getMjesto());
+            // Kontakt podaci
+            System.out.println("----------------");
+            System.out.println("|Kontakt podaci|");
+            System.out.println("----------------");
+            System.out.println("Adresa: " + getAdresa());
+            System.out.println("Telefon: " + getTelefon());
+            System.out.println("Email: " + getEmail());
+            // Podaci o studiju
+            System.out.println("------------------");
+            System.out.println("|Podaci o studiju|");
+            System.out.println("------------------");
+            System.out.println("Odsjek: " + getOdsjek());
+            System.out.println("Godina studija: " + getGodina());
+            System.out.println("Ciklus: " + getCiklus());
+            System.out.println(((RadioButton) statusFinansiranja.getSelectedToggle()).getText());
+            if (borackeKategorijeCheck.isSelected()) {
+                System.out.println("Pripada posebnim boračkim kategorijama.");
+            } else {
+                System.out.println("Ne pripada posebnim boračkim kategorijama.");
+            }
         }
     }
 

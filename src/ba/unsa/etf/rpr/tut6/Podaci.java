@@ -24,12 +24,12 @@ public class Podaci {
     }
 
     static boolean isJmbgValid(String jmbg, LocalDate datum) {
-        System.out.println("Pocetak jmbg provjere");
-        /*System.out.println(jmbg);
+        /*System.out.println("Pocetak jmbg provjere");
+        System.out.println(jmbg);
         System.out.println(jmbg.matches("[0-9]*"));
         System.out.println(datum == null);*/
         if (jmbg.length() != 13 || !jmbg.matches("[0-9]*") || datum == null) {
-            System.out.println("Hmm");
+            //System.out.println("Hmm");
             return  false;
         }
         int[] brojevi = new int[13];
@@ -45,14 +45,14 @@ public class Podaci {
         if (dan != datum.getDayOfMonth() || mjesec != datum.getMonthValue() || godina != datum.getYear()) {
             return false;
         }
-        System.out.println("Do regije");
+        //System.out.println("Do regije");
         // Provjera regije
         int politickaRegija = 10 * brojevi[7] + brojevi[8];
         if (politickaRegija < 0 || politickaRegija > 96) {
             return false;
         }
         // if (zenica, sarajevo ...
-        System.out.println("Do kontrolne");
+        //System.out.println("Do kontrolne");
         // Kontrolna cifra
         int kontrolnaCifra = 11 - ((7*(brojevi[0] + brojevi[6]) + 6*(brojevi[1] + brojevi[7]) + 5*(brojevi[2] + brojevi[8])
                 + 4*(brojevi[3] + brojevi[9]) + 3*(brojevi[4] + brojevi[10]) + 2*(brojevi[5] + brojevi[11])) % 11);
