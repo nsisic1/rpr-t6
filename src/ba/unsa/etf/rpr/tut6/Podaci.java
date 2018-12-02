@@ -63,8 +63,10 @@ public class Podaci {
     }
 
     static boolean isDateValid(LocalDate datum) {
+        if (datum == null) {
+            return false;
+        }
         return datum.compareTo(now()) < 1;
-        // jmbg?
     }
 
     static boolean isEmailValid(String email) {
@@ -80,7 +82,7 @@ public class Podaci {
     }
 
     static boolean isTelefonValid(String broj) {
-        return broj.matches("\\d{3}-\\d{6}");
+        return broj.matches("\\d{3}-\\d{3} \\d{3}");
     }
 
 }

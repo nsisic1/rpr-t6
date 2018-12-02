@@ -47,9 +47,21 @@
                         <Label text="Ime" GridPane.rowIndex="1" />
                         <Label text="Prezime" GridPane.rowIndex="2" />
                         <Label text="Broj indeksa" GridPane.rowIndex="3" />
-                        <TextField fx:id="imeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="prezimeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="brojIndeksaField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="imeField" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+                            <tooltip>
+                                <Tooltip text="Najviše 20 karaktera, ne smije biti prazno, mora sadržavati barem jedno slovo"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="prezimeField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <tooltip>
+                                <Tooltip text="Najviše 20 karaktera, ne smije biti prazno, mora sadržavati barem jedno slovo"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="brojIndeksaField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <tooltip>
+                                <Tooltip text="Petocifreni broj"/>
+                            </tooltip>
+                        </TextField>
                     </children>
                     <padding>
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
@@ -71,9 +83,18 @@
                         <Label text="JMBG" GridPane.rowIndex="1" />
                         <Label text="Datum rođenja" GridPane.rowIndex="2" />
                         <Label text="Mjesto rođenja" GridPane.rowIndex="3" />
-                        <TextField fx:id="jmbgField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="mjestoBox" editable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="jmbgField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <tooltip>
+                                <Tooltip text="JMBG mora biti validan i slagati se sa datumom rodjenja"/>
+                            </tooltip>
+                        </TextField>
+                        <DatePicker fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <tooltip>
+                                <Tooltip text="Validan datum"/>
+                            </tooltip>
+                        </DatePicker>
+                        <ComboBox fx:id="mjestoBox" editable="true" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                            value="Sarajevo">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Sarajevo" />
@@ -81,6 +102,7 @@
                                     <String fx:value="Tuzla" />
                                     <String fx:value="Mostar" />
                                     <String fx:value="Zenica" />
+                                    <String fx:value="Bihac" />
                                 </FXCollections>
                             </items>
                         </ComboBox>
@@ -103,8 +125,16 @@
                     <children>
                         <Label text="Kontakt  podaci" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
                         <TextField fx:id="adresaField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="telefonField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="telefonField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <tooltip>
+                                <Tooltip text="xxx-xxx xxx"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <tooltip>
+                                <Tooltip text="Validan Email"/>
+                            </tooltip>
+                        </TextField>
                         <Label text="Kontakt adresa" GridPane.rowIndex="1" />
                         <Label text="Kontakt telefon" GridPane.rowIndex="2" />
                         <Label text="Email adresa" GridPane.rowIndex="3" />
@@ -132,7 +162,7 @@
                         <Label text="Godina studija" GridPane.rowIndex="2" />
                         <Label text="Ciklus studija" GridPane.rowIndex="3" />
                         <CheckBox fx:id="borackeKategorijeCheck" mnemonicParsing="false" text="Pripada posebnim boračkim kategorijama" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                        <ChoiceBox fx:id="odsjekBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <ChoiceBox fx:id="odsjekBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" value="AE">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="AE" />
@@ -142,7 +172,7 @@
                                 </FXCollections>
                             </items>
                         </ChoiceBox>
-                        <ChoiceBox fx:id="godinaBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <ChoiceBox fx:id="godinaBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" value="Prva">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Prva" />
@@ -151,7 +181,7 @@
                                 </FXCollections>
                             </items>
                         </ChoiceBox>
-                        <ChoiceBox fx:id="ciklusBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <ChoiceBox fx:id="ciklusBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" value="Bachelor">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Bachelor" />

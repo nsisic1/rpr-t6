@@ -224,50 +224,56 @@ public class Controller {
     }
 
     public void potvrdiClick(ActionEvent actionEvent) {
-        /*if (Podaci.isEmailValid(getEmail())) {
-            prezime.set(getIme());
-        }
-        //ime.set("Abc");
-        brojIndeksa.set("");*/
-        //System.out.println(formularValidan());
         if (formularValidan()) {
-            System.out.println("**** Podaci o studentu ****");
-            // Osnovni podaci
-            System.out.println("----------------");
-            System.out.println("|Osnovni podaci|");
-            System.out.println("----------------");
-            System.out.println("Ime i prezime: " + getIme() + " " + getPrezime());
-            System.out.println("Broj indeksa: " + getBrojIndeksa());
-            // Detaljni licni podaci
-            System.out.println("-----------------------");
-            System.out.println("|Detaljni lični podaci|");
-            System.out.println("-----------------------");
-            System.out.println("JMBG: " + getJmbg());
-            System.out.println("Datum rođenja: " + dateField.getValue().toString());
-            System.out.println("Mjesto rođenja: " + getMjesto());
-            // Kontakt podaci
-            System.out.println("----------------");
-            System.out.println("|Kontakt podaci|");
-            System.out.println("----------------");
-            System.out.println("Adresa: " + getAdresa());
-            System.out.println("Telefon: " + getTelefon());
-            System.out.println("Email: " + getEmail());
-            // Podaci o studiju
-            System.out.println("------------------");
-            System.out.println("|Podaci o studiju|");
-            System.out.println("------------------");
-            System.out.println("Odsjek: " + getOdsjek());
-            System.out.println("Godina studija: " + getGodina());
-            System.out.println("Ciklus: " + getCiklus());
-            System.out.println(((RadioButton) statusFinansiranja.getSelectedToggle()).getText());
-            if (borackeKategorijeCheck.isSelected()) {
-                System.out.println("Pripada posebnim boračkim kategorijama.");
-            } else {
-                System.out.println("Ne pripada posebnim boračkim kategorijama.");
-            }
+            ispisiPodatke();
+        } else {
+            // Dijaloski prozor da forma nije validna
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid form");
+            alert.setHeaderText("Formular nije validan!");
+            alert.setContentText("Ispravite ili unesite polja sa crvenom bojom.");
+            alert.show();
         }
     }
 
+    private void ispisiPodatke() {
+        System.out.println("**** Podaci o studentu ****");
+        // Osnovni podaci
+        System.out.println("----------------");
+        System.out.println("|Osnovni podaci|");
+        System.out.println("----------------");
+        System.out.println("Ime i prezime: " + getIme() + " " + getPrezime());
+        System.out.println("Broj indeksa: " + getBrojIndeksa());
+        // Detaljni licni podaci
+        System.out.println("-----------------------");
+        System.out.println("|Detaljni lični podaci|");
+        System.out.println("-----------------------");
+        System.out.println("JMBG: " + getJmbg());
+        System.out.println("Datum rođenja: " + dateField.getValue().toString());
+        System.out.println("Mjesto rođenja: " + getMjesto());
+        // Kontakt podaci
+        System.out.println("----------------");
+        System.out.println("|Kontakt podaci|");
+        System.out.println("----------------");
+        System.out.println("Adresa: " + getAdresa());
+        System.out.println("Telefon: " + getTelefon());
+        System.out.println("Email: " + getEmail());
+        // Podaci o studiju
+        System.out.println("------------------");
+        System.out.println("|Podaci o studiju|");
+        System.out.println("------------------");
+        System.out.println("Odsjek: " + getOdsjek());
+        System.out.println("Godina studija: " + getGodina());
+        System.out.println("Ciklus: " + getCiklus());
+        System.out.println(((RadioButton) statusFinansiranja.getSelectedToggle()).getText());
+        if (borackeKategorijeCheck.isSelected()) {
+            System.out.println("Pripada posebnim boračkim kategorijama.");
+        } else {
+            System.out.println("Ne pripada posebnim boračkim kategorijama.");
+        }
+        System.out.println("\n");
+    }
 
+    // TODO: krahira kad nisu selektovani odjsek, godina itd; Testovi; validacija sa pasivnim indikatorom; dijaloski prozor; testovi
 
 }
