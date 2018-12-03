@@ -26,22 +26,31 @@ class MainTest {
 
     @Test
     public void nameFieldTest(FxRobot robot) {
-        TextField nameField = robot.lookup("#imeField").queryAs(TextField.class);
+        TextField imeField = robot.lookup("#imeField").queryAs(TextField.class);
         robot.clickOn("#imeField").write("Nedim");
-        assertEquals("Nedim", nameField.getText());
+        assertEquals("Nedim", imeField.getText());
     }
 
     @Test
     public void surnameFieldTest(FxRobot robot) {
-        TextField surnameField = robot.lookup("#prezimeField").queryAs(TextField.class);
+        TextField prezimeField = robot.lookup("#prezimeField").queryAs(TextField.class);
         robot.clickOn("#prezimeField").write("Sisic");
-        assertEquals("Sisic", surnameField.getText());
+        assertEquals("Sisic", prezimeField.getText());
     }
 
     @Test
     public void indexFieldTest(FxRobot robot) {
-        TextField indexField = robot.lookup("#brojIndeksaField").queryAs(TextField.class);
+        TextField brojIndeksaField = robot.lookup("#brojIndeksaField").queryAs(TextField.class);
         robot.clickOn("#brojIndeksaField").write("17962");
-        assertEquals("17962", indexField.getText());
+        assertEquals("17962", brojIndeksaField.getText());
+    }
+
+    @Test
+    public void jmbgValidityTest(FxRobot robot) {
+        TextField jmbgField = robot.lookup("#jmbgField").queryAs(TextField.class);
+        robot.clickOn("#jmbgField").write("1811997190027");
+        robot.clickOn("#dateField").write("18/11/1997");
+        robot.clickOn("#jmbgField");
+        assertEquals("text-input text-field poljeIspravno", jmbgField.getStyleClass().toString());
     }
 }
