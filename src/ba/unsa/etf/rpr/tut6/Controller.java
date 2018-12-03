@@ -157,11 +157,11 @@ public class Controller {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
                 if (isValid.apply(n)) {
-                    field.getStyleClass().removeAll("poljeNijeIspravno");
+                    field.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
                     field.getStyleClass().add("poljeIspravno");
                     valid.set(true);
                 } else {
-                    field.getStyleClass().removeAll("poljeIspravno");
+                    field.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
                     field.getStyleClass().add("poljeNijeIspravno");
                     valid.set(false);
                 }
@@ -175,8 +175,6 @@ public class Controller {
         jmbgField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                //LocalDate datum = d.getValue();
-                // System.out.println(datum);
                 updateJmbgFieldClass();
             }
         });
@@ -188,15 +186,14 @@ public class Controller {
         dateField.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observable, LocalDate o, LocalDate n) {
-                //System.out.println(dateField.getValue());
                 if (Podaci.isDateValid(dateField.getValue())) {
-                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateField.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
                     dateField.getStyleClass().add("poljeIspravno");
                     validanDatum.set(true);
                     // Vrsimo provjeru JMBG
                     updateJmbgFieldClass();
                 } else {
-                    dateField.getStyleClass().removeAll("poljeIspravno");
+                    dateField.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
                     dateField.getStyleClass().add("poljeNijeIspravno");
                     validanDatum.set(false);
                 }
@@ -207,11 +204,11 @@ public class Controller {
 
     private void updateJmbgFieldClass() {
         if (Podaci.isJmbgValid(getJmbg(), dateField.getValue())) {
-            jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+            jmbgField.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
             jmbgField.getStyleClass().add("poljeIspravno");
             validanJmbg.set(true);
         } else {
-            jmbgField.getStyleClass().removeAll("poljeIspravno");
+            jmbgField.getStyleClass().removeAll("poljeIspravno", "poljeNijeIspravno");
             jmbgField.getStyleClass().add("poljeNijeIspravno");
             validanJmbg.set(false);
         }
